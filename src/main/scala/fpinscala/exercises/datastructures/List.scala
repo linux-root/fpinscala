@@ -99,7 +99,24 @@ object List: // `List` companion object. Contains functions for creating and wor
 
   def appendViaFoldRight[A](l: List[A], r: List[A]): List[A] = ???
 
-  def concat[A](l: List[List[A]]): List[A] = ???
+  def ++[A](l1: List[A], l2: List[A]): List[A] = {
+    (l1, l2) match {
+      case (Nil, Nil) => Nil
+      case (Nil, xs) => xs
+      case (xs, Nil) => xs
+      case (Cons(h1, tail), xs) => 
+       Cons(h1, ++(tail, xs))
+    }
+  }
+
+  def concat[A](l: List[List[A]]): List[A] = {
+    l match {
+       case Nil =>
+         Nil
+      case Cons(h, t) =>
+        ++(h, concat(t))
+    }
+  }
 
   def incrementEach(l: List[Int]): List[Int] = ???
 
@@ -109,7 +126,13 @@ object List: // `List` companion object. Contains functions for creating and wor
 
   def filter[A](as: List[A], f: A => Boolean): List[A] = ???
 
-  def flatMap[A,B](as: List[A], f: A => List[B]): List[B] = ???
+  def flatMap[A,B](as: List[A], f: A => List[B]): List[B] = {
+    as match {
+      case Nil => Nil
+      case Cons(head, tail) =>
+       ++(f(head), flatMap(tail, f))
+    }
+  }
 
   def filterViaFlatMap[A](as: List[A], f: A => Boolean): List[A] = ???
 

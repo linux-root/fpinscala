@@ -1,7 +1,6 @@
 import fpinscala.exercises.datastructures.List
-import fpinscala.exercises.datastructures.List.*
 
-val xs = List(1, 2, 3, 4, 5)
-List.sum(xs)
-List.append(List(1, 2), List(3))
+val xs = List(1, 2, 3)
+val ys = List(4, 5, 6)
 
+List.concat(List(xs, ys))
